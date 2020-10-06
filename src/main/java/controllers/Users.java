@@ -57,12 +57,12 @@ public class Users{
 
     @POST
     @Path("add") //Create method to create a new record in the database
-    public String UsersAdd(@FormDataParam("UserID") Integer UserID, @FormDataParam("UserName") String UserName, @FormDataParam("Password") String UserPass, @FormDataParam("SubMaths") Boolean UserSubMaths, @FormDataParam("SubCompSci") Boolean UserSubCompSci, @FormDataParam("SubPhysics") Boolean UserSubPhysics){
+    public String UsersAdd(@FormDataParam("name") String UserName, @FormDataParam("password") String UserPass, @FormDataParam("subMaths") Boolean UserSubMaths,
+                           @FormDataParam("subCompSci") Boolean UserSubCompSci, @FormDataParam("subPhysics") Boolean UserSubPhysics){
         System.out.println("Invoked Users.UsersAdd()");
         try {
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (userId, name, password, subMaths, subCompSci, subPhysics) VALUES (?, ?, ?, ?, ?, ?)");
-            ps.setInt(1, UserID);
-            ps.setString(2, UserName);
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (name, password, subMaths, subCompSci, subPhysics) VALUES (?, ?, ?, ?, ?, ?)");
+            ps.setString(1, UserName);
             ps.setString(3, UserPass);
             ps.setBoolean(4, UserSubMaths);
             ps.setBoolean(5, UserSubCompSci);
