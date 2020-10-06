@@ -57,16 +57,16 @@ public class Users{
 
     @POST
     @Path("add") //Create method to create a new record in the database
-    public String UsersAdd(@FormDataParam("name") String UserName, @FormDataParam("password") String UserPass, @FormDataParam("subMaths") Boolean UserSubMaths,
-                           @FormDataParam("subCompSci") Boolean UserSubCompSci, @FormDataParam("subPhysics") Boolean UserSubPhysics){
+    public String UsersAdd(@FormDataParam("name") String name, @FormDataParam("password") String password, @FormDataParam("subMaths") Boolean subMaths,
+                           @FormDataParam("subCompSci") Boolean subCompSci, @FormDataParam("subPhysics") Boolean subPhysics){
         System.out.println("Invoked Users.UsersAdd()");
         try {
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (name, password, subMaths, subCompSci, subPhysics) VALUES (?, ?, ?, ?, ?, ?)");
-            ps.setString(1, UserName);
-            ps.setString(3, UserPass);
-            ps.setBoolean(4, UserSubMaths);
-            ps.setBoolean(5, UserSubCompSci);
-            ps.setBoolean(6, UserSubPhysics);
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (name, password, subMaths, subCompSci, subPhysics) VALUES (?, ?, ?, ?, ?)");
+            ps.setString(1, name);
+            ps.setString(2, password;
+            ps.setBoolean(3, subMaths);
+            ps.setBoolean(4, subCompSci);
+            ps.setBoolean(5, subPhysics);
             ps.execute();
             return "{\"OK\": \"Added user.\"}";
         } catch (Exception exception) {
