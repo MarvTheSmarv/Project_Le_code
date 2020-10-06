@@ -57,12 +57,13 @@ public class Users{
 
     @POST
     @Path("add") //Create method to create a new record in the database
-    public String UsersAdd(@FormDataParam("UserID") Integer UserID, @FormDataParam("UserName") String UserName) {
+    public String UsersAdd(@FormDataParam("UserID") Integer UserID, @FormDataParam("UserName") String UserName, @FormDataParam("Password") String UserPass) {
         System.out.println("Invoked Users.UsersAdd()");
         try {
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (userId, name) VALUES (?, ?)");
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (userId, name, password) VALUES (?, ?, ?)");
             ps.setInt(1, UserID);
             ps.setString(2, UserName);
+            ps.setString(3, UserPass);
             ps.execute();
             return "{\"OK\": \"Added user.\"}";
         } catch (Exception exception) {
@@ -80,7 +81,7 @@ public class Users{
             ps.setString(1, UserName);
             ps.setInt(2, UserID);
             ps.execute();
-            return "{\"OK\": \"Users updated\"}";
+            return "{\"OK\": \"Users updated.\"}";
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"Error\": \"Unable to update item, please see server console for more info.\"}";
@@ -99,7 +100,7 @@ public class Users{
             PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Users WHERE userId = ?");
             ps.setInt(1, UserID);
             ps.execute();
-            return "{\"OK\": \"User deleted\"}";
+            return "{\"OK\": \"User deleted. Bye bye.\"}";
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"Error\": \"Unable to delete item, please see server console for more info.\"}";
