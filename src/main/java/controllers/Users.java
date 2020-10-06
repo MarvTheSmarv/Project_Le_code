@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 
 public class Users{
     @GET
-    @Path("list") //Read method to read from the database
+    @Path("list") //Read method to read from the database, 'curl -s localhost:8081/users/list' in git bash (ATM only displays userId and name)
     public String UsersList() {
         System.out.println("Invoked Users.UsersList()");
         JSONArray response = new JSONArray();
@@ -25,8 +25,8 @@ public class Users{
             ResultSet results = ps.executeQuery();
             while (results.next()==true) {
                 JSONObject row = new JSONObject();
-                row.put("UserID", results.getInt(1));
-                row.put("UserName", results.getString(2));
+                row.put("userId", results.getInt(1));
+                row.put("name", results.getString(2));
                 response.add(row);
             }
             return response.toString();
@@ -36,17 +36,17 @@ public class Users{
         }
     }
     @GET
-    @Path("get/{UserID}") //Get one record from the database
-    public String GetUser(@PathParam("UserID") Integer UserID) {
-        System.out.println("Invoked Users.GetUser() with UserID " + UserID);
+    @Path("get/{userId}") //Get one record from the database, 'curl -s localhost:8081/users/get/1' (1 is example of UserId) in git bash (Currently returns the name of the userId entered)
+    public String GetUser(@PathParam("userId") Integer userId) {
+        System.out.println("Invoked Users.GetUser() with userId " + userId);
         try {
             PreparedStatement ps = Main.db.prepareStatement("SELECT name FROM Users WHERE userId = ?");
-            ps.setInt(1, UserID);
+            ps.setInt(1, userId);
             ResultSet results = ps.executeQuery();
             JSONObject response = new JSONObject();
             if (results.next()== true) {
-                response.put("UserID", UserID);
-                response.put("UserName", results.getString(1));
+                response.put("userId", userId);
+                response.put("name", results.getString(1));
             }
             return response.toString();
         } catch (Exception exception) {
@@ -56,19 +56,19 @@ public class Users{
     }
 
     @POST
-    @Path("add") //Create method to create a new record in the database
+    @Path("add") //Create method to create a new record in the database, 'curl -s localhost:8081/users/add -F name='Pascal8' -F password='YesNo1' -F subMaths=True -F subCompSci=True -F subPhysics=True' for example in git bash
     public String UsersAdd(@FormDataParam("name") String name, @FormDataParam("password") String password, @FormDataParam("subMaths") Boolean subMaths,
                            @FormDataParam("subCompSci") Boolean subCompSci, @FormDataParam("subPhysics") Boolean subPhysics){
         System.out.println("Invoked Users.UsersAdd()");
         try {
             PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (name, password, subMaths, subCompSci, subPhysics) VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, name);
-            ps.setString(2, password;
+            ps.setString(2, password);
             ps.setBoolean(3, subMaths);
             ps.setBoolean(4, subCompSci);
             ps.setBoolean(5, subPhysics);
             ps.execute();
-            return "{\"OK\": \"Added user.\"}";
+            return "{\"OK\": \"Added user. (∩─ᗝ─)⊃━☆ﾟ.*☆ﾟ *Bing*\"}";
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"Error\": \"Unable to create new item, please see server console for more info.\"}";
@@ -76,22 +76,23 @@ public class Users{
 
     }
     @POST
-    @Path("update") //Update method to update an existing record in the database
-    public String updateFood(@FormDataParam("UserID") Integer UserID, @FormDataParam("UserName") String UserName) {
+    @Path("update") //Update method to update an existing record in the database, 'curl -s -X POST localhost:8081/users/update -F UserID=8 -F UserName='Toast' for example in git bash
+    public String updateFood(@FormDataParam("userId") Integer userId, @FormDataParam("name") String name) {
         try {
-            System.out.println("Invoked Users.UpdateUsers/update UserID=" + UserID);
+            System.out.println("Invoked Users.UpdateUsers/update userId=" + userId);
             PreparedStatement ps = Main.db.prepareStatement("UPDATE Users SET name = ? WHERE userId = ?");
-            ps.setString(1, UserName);
-            ps.setInt(2, UserID);
+            ps.setString(1, name);
+            ps.setInt(2, userId);
             ps.execute();
-            return "{\"OK\": \"Users updated.\"}";
+            return "{\"OK\": \"Users updated. (∩─ᗝ─)⊃━☆ﾟ.*☆ﾟ Magic.\"}";
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"Error\": \"Unable to update item, please see server console for more info.\"}";
         }
     }
     @POST
-    @Path("delete/{UserID}") //Delete method to delete a record from the database
+    @Path("delete/{UserID}") //Delete method to delete a record from the database, 'curl -s -X POST localhost:8081/users/delete/8' (8 is example of userId) in git bash
+
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
     public String DeleteUser(@PathParam("UserID") Integer UserID) throws Exception {
@@ -103,7 +104,7 @@ public class Users{
             PreparedStatement ps = Main.db.prepareStatement("DELETE FROM Users WHERE userId = ?");
             ps.setInt(1, UserID);
             ps.execute();
-            return "{\"OK\": \"User deleted. Bye bye.\"}";
+            return "{\"OK\": \"User deleted. (∩─ᗝ─)⊃━☆ﾟ.*☆ﾟ *Poof*\"}";
         } catch (Exception exception) {
             System.out.println("Database error: " + exception.getMessage());
             return "{\"Error\": \"Unable to delete item, please see server console for more info.\"}";
