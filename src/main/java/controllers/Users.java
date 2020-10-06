@@ -23,7 +23,7 @@ public class Users{
         System.out.println("Invoked Users.UsersList()");
         JSONArray response = new JSONArray();
         try {
-            PreparedStatement ps = Main.db.prepareStatement("SELECT userID, name FROM Users");
+            PreparedStatement ps = Main.db.prepareStatement("SELECT userId, name FROM Users");
             ResultSet results = ps.executeQuery();
             while (results.next()==true) {
                 JSONObject row = new JSONObject();
