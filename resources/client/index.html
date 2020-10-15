@@ -17,21 +17,24 @@
 <body>
 <p style="font-size:100px;text-align: center">Get yeeted boi</p>
 <img src="img/Kim.jpg" height="184" width="184" class="centre"/></img>
+
 <button onclick='getUsersList();'>Run getUsersList</button>
 <table id="UsersTable"></table>
 <br>
 
 <form id="userDetails">
-    User id: <input type="text" id="UserID">
+    User id: <input type="text" id="userId">
 </form>
 <button onclick='getUser();'>Run getUser</button>
 <div id="DisplayOneUser"></div>
 <br>
 
 <form id="InputUserDetails">
-    Username: <input type="text" name="UserName">
-    Password: <input type="text" name="PassWord">
-    Skill Level: <input type="text" name="UserSkillLevel">
+    Name: <input type="text" name="name">
+    Password: <input type="text" name="password">
+    Maths: <input type="checkbox" name="subMaths" id="subMaths">
+    Computer Science: <input type="checkbox" name="subCompSci " id="subCompSci">
+    Physics: <input type="checkbox" name="subPhysics" id="subPhysics">
 </form>
 <button onclick='addUser();'>Add User</button>
 </body>
