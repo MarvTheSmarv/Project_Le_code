@@ -13,6 +13,8 @@
     <title>Yeet</title>
     <script src="/client/js/users.js"></script>
     <link rel="stylesheet" type="text/css" href="/client/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.2.1/js.cookie.js"></script>
+    <script src="/client/js/users.js"></script>
 </head>
 <body>
 <p style="font-size:100px;text-align: center">Get yeeted boi</p>
@@ -32,10 +34,17 @@
 <form id="InputUserDetails">
     Name: <input type="text" name="name">
     Password: <input type="text" name="password">
+    Email: <input type="text" name="email">
     Maths: <input type="checkbox" name="subMaths" id="subMaths">
     Computer Science: <input type="checkbox" name="subCompSci " id="subCompSci">
     Physics: <input type="checkbox" name="subPhysics" id="subPhysics">
+    Admin: <input type="checkbox" name="subPhysics" id="admin">
 </form>
+
 <button onclick='addUser();'>Add User</button>
+<br>
+
+<button onclick='logout();'>LOGOUT</button>
+
 </body>
 </html>
