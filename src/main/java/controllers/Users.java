@@ -116,8 +116,8 @@ public class Users{
     @POST
     @Path("add") //Create method to create a new record in the database, 'curl -s localhost:8081/users/add -F name='Pascal8' -F password='YesNo1' -F subMaths=True -F subCompSci=True -F subPhysics=True' for example in git bash
     public String UsersAdd(@FormDataParam("name") String name, @FormDataParam("password") String password, @FormDataParam("email") String email,
-                           @FormDataParam("subMaths") Boolean subMaths, @FormDataParam("subCompSci") Boolean subCompSci, @FormDataParam("subPhysics") Boolean subPhysics
-                            , @FormDataParam("admin") Boolean admin){
+                           @FormDataParam("subMaths") Boolean subMaths, @FormDataParam("subCompSci") Boolean subCompSci, @FormDataParam("subPhysics") Boolean subPhysics,
+                           @FormDataParam("admin") Boolean admin){
         System.out.println("Invoked Users.UsersAdd()");
         try {
             PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (name, password, email, subMaths, subCompSci, subPhysics, admin) VALUES (?, ?, ?, ?, ?, ?, ?");
