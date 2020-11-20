@@ -139,7 +139,7 @@ public class Users{
 
     @POST
     @Path("update") //Update method to update an existing record in the database, 'curl -s -X POST localhost:8081/users/update -F UserID=8 -F UserName='Toast' for example in git bash
-    public String updateFood(@FormDataParam("userId") Integer userId, @FormDataParam("name") String name) {
+    public String updateUsers(@FormDataParam("userId") Integer userId, @FormDataParam("name") String name) {
         try {
             System.out.println("Invoked Users.UpdateUsers/update userId=" + userId);
             PreparedStatement ps = Main.db.prepareStatement("UPDATE Users SET name = ? WHERE userId = ?");
