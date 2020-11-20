@@ -74,7 +74,7 @@ public class Users{
 
     @GET
     @Path("list") //Read method to read from the database, 'curl -s localhost:8081/users/list' in git bash (ATM only displays userId and name)
-    public String UsersList() {
+    public String getUsersList() {
         System.out.println("Invoked Users.UsersList()");
         JSONArray response = new JSONArray();
         try {
@@ -95,8 +95,8 @@ public class Users{
 
     @GET
     @Path("get/{userId}") //Get one record from the database, 'curl -s localhost:8081/users/get/1' (1 is example of UserId) in git bash (Currently returns the name of the userId entered)
-    public String GetUser(@PathParam("userId") Integer userId) {
-        System.out.println("Invoked Users.GetUser() with userId " + userId);
+    public String getUser(@PathParam("userId") Integer userId) {
+        System.out.println("Invoked Users.getUser() with userId " + userId);
         try {
             PreparedStatement ps = Main.db.prepareStatement("SELECT name FROM Users WHERE userId = ?");
             ps.setInt(1, userId);
@@ -120,7 +120,7 @@ public class Users{
                            @FormDataParam("admin") Boolean admin){
         System.out.println("Invoked Users.UsersAdd()");
         try {
-            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (name, password, email, subMaths, subCompSci, subPhysics, admin) VALUES (?, ?, ?, ?, ?, ?, ?");
+            PreparedStatement ps = Main.db.prepareStatement("INSERT INTO Users (name, password, email, subMaths, subCompSci, subPhysics, admin) VALUES (?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, name);
             ps.setString(2, password);
             ps.setString(3, email);
